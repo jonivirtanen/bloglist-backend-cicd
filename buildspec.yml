@@ -1,0 +1,22 @@
+version: 0.2
+
+env:
+  variables:
+    LOGIN_USER: /CodeBuild/DockerUser
+    LOGIN_PASS: /CodeBuild/DockerPass
+phases:
+  install:
+    runtime-versions:
+      nodejs: 12 
+    commands:
+      - docker login -u $LOGIN_USER -p $LOGIN_PASS
+  pre_build:
+    commands:
+      - npm install
+      - npm test
+  build:
+    commands:
+      - docker build -t vijoni/bloglist-backend-cicd:aws .
+  post_build:
+    commands:
+      - docker push vijoni/bloglist-backend-cicd:aws

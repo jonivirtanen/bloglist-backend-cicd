@@ -1,7 +1,7 @@
 version: 0.2
 
 env:
-  variables:
+  parameter-store:
     LOGIN_USER: /CodeBuild/DockerUser
     LOGIN_PASS: /CodeBuild/DockerPass
 phases:

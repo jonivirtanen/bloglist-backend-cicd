@@ -6,9 +6,9 @@ steps:
   entrypoint: npm
   args: [ "test" ]
   env:
-    - TEST_MONGODB_URI: $MONGODB_URI
-    - TEST_PORT: 3001
-    - SECRET: $SECRET
+    - "TEST_MONGODB_URI=$$MONGODB_URI"
+    - "TEST_PORT=3001"
+    - "SECRET=$$SECRET"
 - name: "gcr.io/cloud-builders/docker"
   entrypoint: "bash"
   args: [ "-c", "docker login --username=$$USERNAME --password=$$PASSWORD"]

@@ -14,9 +14,11 @@ steps:
 - name: "gcr.io/cloud-builders/docker"
   entrypoint: "bash"
   args: ["-c", "docker build -t $$USERNAME/bloglist-backend-cicd:gcp ."]
+  secretEnv: ["USERNAME"]
 - name: "gcr.io/cloud-builders/docker"
   entrypoint: "bash"
   args: ["-c", "docker push $$USERNAME/bloglist-backend-cicd:gcp"]
+  secretEnv: ["USERNAME"]
 
 availableSecrets:
   secretManager:

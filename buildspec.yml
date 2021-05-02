@@ -1,12 +1,13 @@
 version: 0.2
 
 env:
+  variables:
+    TEST_PORT: 3001
   parameter-store:
     LOGIN_USER: /CodeBuild/DockerUser
     LOGIN_PASS: /CodeBuild/DockerPass
     SECRET: /CodeBuild/SECRET
     TEST_MONGODB_URI: /CodeBuild/MONGODB_URI
-    TEST_PORT: 3001
 phases:
   install:
     runtime-versions:

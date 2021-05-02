@@ -1,30 +1,30 @@
 steps:
 - name: node
   entrypoint: npm
-  args: [ "install" ]
-- name: node
-  entrypoint: npm
-  args: [ "test" ]
-  env: [ "TEST_PORT=3001" ]
-  secretEnv: [ "SECRET", "MONGODB_URI" ]
+  args: ["install"]
+    #- name: node
+    #entrypoint: npm
+    #args: ["test"]
+    #env: ["TEST_PORT=3001"]
+    #secretEnv: ["SECRET", "MONGODB_URI"]
 - name: "gcr.io/cloud-builders/docker"
   entrypoint: "bash"
-  args: [ "-c", "docker login --username=$$USERNAME --password=$$PASSWORD"]
-  secretEnv: [ "USERNAME", "PASSWORD" ]
+  args: ["-c", "docker login --username=$$USERNAME --password=$$PASSWORD"]
+  secretEnv: ["USERNAME", "PASSWORD"]
 - name: "gcr.io/cloud-builders/docker"
   entrypoint: "bash"
-  args: [ "-c", "docker build -t $$USERNAME/bloglist-backend-cicd:gcp ." ]
+  args: ["-c", "docker build -t $$USERNAME/bloglist-backend-cicd:gcp ."]
 - name: "gcr.io/cloud-builders/docker"
   entrypoint: "bash"
-  args: [ "-c", "docker push $$USERNAME/bloglist-backend-cicd:gcp" ]
+  args: ["-c", "docker push $$USERNAME/bloglist-backend-cicd:gcp"]
 
 availableSecrets:
   secretManager:
-    - versionName: projects/752307683630/secrets/docker-password 
+    - versionName: projects/752307683630/secrets/docker-password
       env: "PASSWORD"
-    - versionName: projects/752307683630/secrets/docker-username 
+    - versionName: projects/752307683630/secrets/docker-username
       env: "USERNAME"
-    - versionName: projects/752307683630/secrets/mongodb 
-      env: "MONGODB_URI"
-    - versionName: projects/752307683630/secrets/secret
-      env: "SECRET"
+        #- versionName: projects/752307683630/secrets/mongodb
+        #env: "MONGODB_URI"
+        #- versionName: projects/752307683630/secrets/secret
+        #env: "SECRET"

@@ -5,7 +5,7 @@ env:
     LOGIN_USER: /CodeBuild/DockerUser
     LOGIN_PASS: /CodeBuild/DockerPass
     SECRET: /CodeBuild/SECRET
-    MONGODB_URI: /CodeBuild/MONGODB_URI
+    TEST_MONGODB_URI: /CodeBuild/MONGODB_URI
 phases:
   install:
     runtime-versions:

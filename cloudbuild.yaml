@@ -5,6 +5,10 @@ steps:
 - name: node
   entrypoint: npm
   args: [ "test" ]
+  env:
+    - TEST_MONGODB_URI: $MONGODB_URI
+    - TEST_PORT: 3001
+    - SECRET: $SECRET
 - name: "gcr.io/cloud-builders/docker"
   entrypoint: "bash"
   args: [ "-c", "docker login --username=$$USERNAME --password=$$PASSWORD"]
@@ -23,6 +27,6 @@ availableSecrets:
     - versionName: projects/752307683630/secrets/docker-username 
       env: "USERNAME"
     - versionName: projects/752307683630/secrets/mongodb 
-      env: MONGODB_URI
+      env: "MONGODB_URI"
     - versionName: projects/752307683630/secrets/secret
-      env: SECRET 
+      env: "SECRET"

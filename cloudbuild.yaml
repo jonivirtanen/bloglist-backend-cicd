@@ -20,11 +20,11 @@ steps:
 
 availableSecrets:
   secretManager:
-    - versionName: projects/752307683630/secrets/docker-password
+    - versionName: projects/752307683630/secrets/docker-password/versions/1 
       env: "PASSWORD"
-    - versionName: projects/752307683630/secrets/docker-username
+    - versionName: projects/752307683630/secrets/docker-username 
       env: "USERNAME"
-        #- versionName: projects/752307683630/secrets/mongodb
+        #- versionName: projects/752307683630/secrets/mongodb/versions/1
         #env: "MONGODB_URI"
-        #- versionName: projects/752307683630/secrets/secret
+        #- versionName: projects/752307683630/secrets/secret/versions/1 
         #env: "SECRET"

@@ -26,6 +26,7 @@ pipeline {
 	    steps {
 		docker.withRegistry('https://registry.hub.docker.com', 'docker_hub_creds') {
 		    app.push('jenkins')
+		}
 	    }
 	}
     }

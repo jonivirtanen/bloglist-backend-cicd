@@ -11,11 +11,22 @@ pipeline {
 	SECRET = credentials('SECRET')
     }
     stages {
-        stage('Build') { 
+        stage('pre-build') { 
             steps {
                 sh 'npm install' 
 		sh 'npm test'
             }
         }
+	stage('build docker image') { 
+	    steps {
+		app = docker.build('vijoni/bloglist-backend-cicd:jenkins')
+	    }
+	}
+	stage('push docker image') {
+	    steps {
+		docker.withRegistry('https://registry.hub.docker.com', 'docker_hub_creds') {
+		    app.push('jenkins')
+	    }
+	}
     }
 }

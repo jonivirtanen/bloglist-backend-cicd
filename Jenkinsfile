@@ -19,13 +19,17 @@ pipeline {
         }
 	stage('build docker image') { 
 	    steps {
-		app = docker.build('vijoni/bloglist-backend-cicd:jenkins')
+	        script {
+		    app = docker.build('vijoni/bloglist-backend-cicd:jenkins')
+		}
 	    }
 	}
 	stage('push docker image') {
 	    steps {
-		docker.withRegistry('https://registry.hub.docker.com', 'docker_hub_creds') {
-		    app.push('jenkins')
+		script {
+		    docker.withRegistry('https://registry.hub.docker.com', 'docker_hub_creds') {
+		        app.push('jenkins')
+		    }
 		}
 	    }
 	}

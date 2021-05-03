@@ -17,9 +17,11 @@ pipeline {
 		sh 'npm test'
             }
         }
-	stage ('Initialize Docker') {
-	    def dockerHome = tool 'docker'
-	    env.PATH = "${dockerHome}/bin/:${env.PATH}"
+	stage ('Initialize') {
+	    steps {
+	        def dockerHome = tool 'docker'
+	        env.PATH = "${dockerHome}/bin/:${env.PATH}"
+	    }
 	}
 	stage('build docker image') { 
 	    steps {

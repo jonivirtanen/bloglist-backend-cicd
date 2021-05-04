@@ -19,7 +19,7 @@ pipeline {
         }
         stage('build docker image') { 
             steps {
-                script {
+                script {
                     app = docker.build('vijoni/bloglist-backend-cicd:jenkins')
                 }
              }

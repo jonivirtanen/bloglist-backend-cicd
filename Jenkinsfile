@@ -1,21 +1,17 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:12-buster-slim' 
-            args '-p 3000:3000' 
-        }
-    }
+    agent any
     environment {
         TEST_PORT = 3001
         TEST_MONGODB_URI = credentials('MONGODB_URI')
         SECRET = credentials('SECRET')
-	npm_config_cache = 'npm-cache'
     }
     stages {
         stage('pre-build') { 
             steps {
-                sh 'npm install' 
-                sh 'npm test'
+                nodejs(nodeJSInstallationName: 'Node 12.22.1') {
+                    sh 'npm install' 
+                    sh 'npm test'
+                }
             }
         }
         stage('build docker image') { 
@@ -28,7 +24,7 @@ pipeline {
         stage('push docker image') {
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'docker_hub_creds') {
+                    docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-creds') {
                         app.push('jenkins')
                     }
                 }
@@ -36,3 +32,4 @@ pipeline {
         }
     }
 }
+

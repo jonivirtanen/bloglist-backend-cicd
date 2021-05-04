@@ -17,25 +17,15 @@ pipeline {
 		sh 'npm test'
             }
         }
-	stage ('Initialize') {
-	    steps {
-	        def dockerHome = tool 'docker'
-	        env.PATH = "${dockerHome}/bin/:${env.PATH}"
-	    }
-	}
 	stage('build docker image') { 
 	    steps {
-	        script {
-		    app = docker.build('vijoni/bloglist-backend-cicd:jenkins')
-		}
+		def app = docker.build('vijoni/bloglist-backend-cicd:jenkins')
 	    }
 	}
 	stage('push docker image') {
 	    steps {
-		script {
-		    docker.withRegistry('https://registry.hub.docker.com', 'docker_hub_creds') {
-		        app.push('jenkins')
-		    }
+		docker.withRegistry('https://registry.hub.docker.com', 'docker_hub_creds') {
+		    app.push('jenkins')
 		}
 	    }
 	}

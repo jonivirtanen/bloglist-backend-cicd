@@ -1,0 +1,29 @@
+name: bloglist-backend-CI
+
+on:
+  push:
+    branches: [ actions ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.1.5
+        with:
+          node-version: '12.22'
+          
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+        env:
+          TEST_MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          SECRET: ${{ secrets.SECRET }}
+     

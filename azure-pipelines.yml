@@ -22,3 +22,11 @@ steps:
   env:
     TEST_MONGODB_URI: $(MONGODB_URI)
     SECRET: $(SECRET)
+
+- task: Docker@2
+  inputs:
+    containerRegistry: 'Docker Hub'
+    repository: 'vijoni/bloglist-backend-cicd'
+    command: 'buildAndPush'
+    Dockerfile: './Dockerfile'
+    tags: 'azure'

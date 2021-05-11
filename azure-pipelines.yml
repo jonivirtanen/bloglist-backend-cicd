@@ -19,3 +19,6 @@ steps:
     npm install
     npm test
   displayName: 'npm install and test'
+  env:
+    TEST_MONGODB_URI: $(MONGODB_URI)
+    SECRET: $(SECRET)

@@ -3,8 +3,8 @@ steps:
   entrypoint: npm
   args: ["install"]
 - name: node:12
-  entrypoint: npm
-  args: [ "npm_config_SECRET=$$SSECRET", "npm_config_TEST_MONGODB_URI=$$MONGODB_URI", "npm_config_TEST_PORT=3001", "test"]
+  entrypoint: bash
+  args: [ "-c", "npm_config_SECRET=$$SSECRET", "npm_config_TEST_MONGODB_URI=$$MONGODB_URI", "npm_config_TEST_PORT=3001", "npm test"]
   secretEnv: ["SSECRET", "MONGODB_URI"]
   
 - name: "gcr.io/cloud-builders/docker"
